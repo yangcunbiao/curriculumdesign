@@ -2,6 +2,7 @@ package game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 
 public class MainFrame extends JFrame {
     //窗口的宽和高
@@ -18,8 +19,21 @@ public class MainFrame extends JFrame {
         this.setTitle("黑白棋");
         //TODO：设置窗口关闭程序结束
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        //TODO:显示窗口
         this.setVisible(true);
+        //TODO：加入画图组件
+        DrawComponent drawComponent=new DrawComponent();
+        this.add(drawComponent);
+        //TODO:设置背景图片
+        ImageIcon img=new ImageIcon("D:\\curriculumdesign\\src\\picture\\background.jpg");
+        Dimension screenSize =Toolkit.getDefaultToolkit().getScreenSize();
+        Image temp= img.getImage().getScaledInstance(screenSize.width,screenSize.height,img.getImage().SCALE_DEFAULT);
+        img=new ImageIcon(temp);
+        JLabel jLabelBackGround=new JLabel(img);
+        jLabelBackGround.setBounds(0,0,screenSize.width,screenSize.height);
+        this.getLayeredPane().add(jLabelBackGround, Integer.MIN_VALUE);
+        ((JPanel)this.getContentPane()).setOpaque(false);
+
     }
     //TODO：居中用的函数
     private void center(){
