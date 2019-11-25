@@ -15,7 +15,7 @@ public class DrawComponent extends JComponent implements MouseListener, MouseMot
         //TODO:把鼠标光标变为棋子
         Toolkit tk = Toolkit.getDefaultToolkit();
         Image image = new ImageIcon("D:\\curriculumdesign\\src\\picture\\black1.png").getImage();
-        Cursor cursor = tk.createCustomCursor(image, new Point(16, 16), "norm");
+        Cursor cursor = tk.createCustomCursor(image, new Point(20, 20), "norm");
         setCursor(cursor);
     }
     @Override

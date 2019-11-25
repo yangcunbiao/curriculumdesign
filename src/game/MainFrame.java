@@ -22,18 +22,17 @@ public class MainFrame extends JFrame {
         //TODO:显示窗口
         this.setVisible(true);
         //TODO:设置背景图片
-//        ImageIcon img=new ImageIcon("D:\\curriculumdesign\\src\\picture\\background.jpg");
-//        Dimension screenSize =Toolkit.getDefaultToolkit().getScreenSize();
-//        Image temp= img.getImage().getScaledInstance(screenSize.width,screenSize.height,img.getImage().SCALE_DEFAULT);
-//        img=new ImageIcon(temp);
-//        JLabel jLabelBackGround=new JLabel(img);
-//        jLabelBackGround.setBounds(0,0,screenSize.width,screenSize.height);
-//        this.getLayeredPane().add(jLabelBackGround, Integer.MIN_VALUE);
-//        ((JPanel)this.getContentPane()).setOpaque(false);
+        ImageIcon img=new ImageIcon("D:\\curriculumdesign\\src\\picture\\background.jpg");
+        Dimension screenSize =Toolkit.getDefaultToolkit().getScreenSize();
+        Image temp= img.getImage().getScaledInstance(screenSize.width,screenSize.height,img.getImage().SCALE_DEFAULT);
+        img=new ImageIcon(temp);
+        JLabel jLabelBackGround=new JLabel(img);
+        jLabelBackGround.setBounds(0,0,screenSize.width,screenSize.height);
+        this.getRootPane().add(jLabelBackGround);
+        ((JPanel)this.getContentPane()).setOpaque(false);
         //TODO：加入画图组件
         DrawComponent drawComponent=new DrawComponent();
         this.add(drawComponent);
-
 
     }
     //TODO：居中用的函数
