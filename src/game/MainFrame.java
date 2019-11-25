@@ -42,4 +42,5 @@ public class MainFrame extends JFrame {
         int screenHeight = screenSize.height;
         this.setLocation(screenWidth/2-mainWindowWidth/2,screenHeight/2-mainWondowHeight/2);
     }
+
 }
