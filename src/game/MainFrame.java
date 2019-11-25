@@ -42,5 +42,87 @@ public class MainFrame extends JFrame {
         int screenHeight = screenSize.height;
         this.setLocation(screenWidth/2-mainWindowWidth/2,screenHeight/2-mainWondowHeight/2);
     }
+    //TODO：判断能否落子
+    private void judge(int x,int y,int color){
+        Chess[][] chesses = new Chess[8][8];
+        int drapFlag = 0;
+        if(chesses[x][y] != null) {
+            //TODO：判断左
+            if(chesses[x][y-1].getColor() != color && drapFlag !=0){
+                for(int i=y-2;i>=0;i--){
+                    if(chesses[x][i].getColor() == color){
+                        drapFlag = 1;
+                        break;
+                    }
+                }
+            }
+            //TODO：判断右
+            if(chesses[x][y+1].getColor() != color && drapFlag !=0){
+                for(int i=y+2;i<8;i++){
+                    if(chesses[x][i].getColor() == color){
+                        drapFlag = 1;
+                        break;
+                    }
+                }
+            }
+            //TODO：判断上
+            if(chesses[x-1][y].getColor() != color && drapFlag !=0){
+                for(int i=x-2;i>=0;i--){
+                    if(chesses[i][y].getColor() == color){
+                        drapFlag = 1;
+                        break;
+                    }
+                }
+            }
+            //TODO：判断下
+            if(chesses[x+1][y].getColor() != color && drapFlag !=0){
+                for(int i=x+2;i<8;i++){
+                    if(chesses[i][y].getColor() == color){
+                        drapFlag = 1;
+                        break;
+                    }
+                }
+            }
+            //TODO：判断左上
+            if(chesses[x-1][y-1].getColor() != color && drapFlag !=0){
+                for(int i=2;x-i>=0&&y-i>=0;i++){
+                    if(chesses[x-i][y-i].getColor() == color){
+                        drapFlag = 1;
+                        break;
+                    }
+                }
+            }
+            //TODO：判断右上
+            if(chesses[x-1][y+1].getColor() != color && drapFlag !=0){
+                for(int i=2;x-i>=0&&y+i<8;i++){
+                    if(chesses[x-i][y+i].getColor() == color){
+                        drapFlag = 1;
+                        break;
+                    }
+                }
+            }
+            //TODO：判断左下
+            if(chesses[x+1][y-1].getColor() != color && drapFlag !=0){
+                for(int i=2;x+i<8&&y-i>=0;i++){
+                    if(chesses[x+i][y-i].getColor() == color){
+                        drapFlag = 1;
+                        break;
+                    }
+                }
+            }
+            //TODO：判断右下
+            if(chesses[x+1][y+1].getColor() != color && drapFlag !=0){
+                for(int i=2;x+i<8&&y+i<8;i++){
+                    if(chesses[x+i][y+i].getColor() == color){
+                        drapFlag = 1;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    //TODO：判断输赢
+    private void judgeIsWin(){
 
+    }
 }
