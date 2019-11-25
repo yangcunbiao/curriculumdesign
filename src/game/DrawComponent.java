@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class DrawComponent extends JComponent implements MouseListener, MouseMotionListener {
     private int mouseIndexX,mouseIndexY;
+    private Color[][] chessBoard=new Color[8][8];
     private Point2D[][] chessIndex=new Point2D[8][8];
     public  DrawComponent(){
         //TODO:加入鼠标事件和监听器
@@ -20,10 +21,10 @@ public class DrawComponent extends JComponent implements MouseListener, MouseMot
         this.addMouseMotionListener(this);
         //TODO:把鼠标光标变为棋子
         Toolkit tk = Toolkit.getDefaultToolkit();
-        Image image = new ImageIcon("D:\\curriculumdesign\\src\\picture\\black1.png").getImage();
+        Image image = new ImageIcon("black1.png").getImage();
         Cursor cursor = tk.createCustomCursor(image, new Point(20, 20), "norm");
         //setCursor(cursor);
-        //TODO：棋子坐标初始化
+        //TODO：棋子坐标初始化,棋盘初始化
         chessIndexInit();
 
     }
@@ -33,19 +34,24 @@ public class DrawComponent extends JComponent implements MouseListener, MouseMot
             X=188;
             for (int j=0;j<8;j++){
                 chessIndex[i][j]=new Point2D.Double(X,Y);
+                chessBoard[i][j]=Color.NULL;
                 X+=56;
             }
             Y+=56;
         }
+        chessBoard[4][4]=Color.WHITE;
+        chessBoard[4][5]=Color.BLACK;
+        chessBoard[5][4]=Color.BLACK;
+        chessBoard[5][5]=Color.WHITE;
     }
     @Override
     public void paintComponent(Graphics g){
         Image chessBoardImage=null,blackImage1=null,whiteImage1=null;
 
         try {
-            chessBoardImage = ImageIO.read(new File("D:\\curriculumdesign\\src\\picture\\chessboard.png"));
-            blackImage1 = ImageIO.read(new File("D:\\curriculumdesign\\src\\picture\\black1.png"));
-            whiteImage1 = ImageIO.read(new File("D:\\curriculumdesign\\src\\picture\\white1.png"));
+            chessBoardImage = ImageIO.read(new File("chessboard.png"));
+            blackImage1 = ImageIO.read(new File("black1.png"));
+            whiteImage1 = ImageIO.read(new File("white1.png"));
             g.drawImage(chessBoardImage,167,125,490,495,null);
             for (int i=0;i<8;i++){
                 for (int j=0;j<8;j++){

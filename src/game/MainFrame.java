@@ -15,14 +15,14 @@ public class MainFrame extends JFrame {
         //TODO：窗口位置居中
         this.center();
         //TODO：设置图标和标题
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage("D:\\curriculumdesign\\src\\picture\\ico.png"));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("ico.png"));
         this.setTitle("黑白棋");
         //TODO：设置窗口关闭程序结束
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //TODO:显示窗口
         this.setVisible(true);
         //TODO:设置背景图片
-        ImageIcon img=new ImageIcon("D:\\curriculumdesign\\src\\picture\\background.jpg");
+        ImageIcon img=new ImageIcon("background.jpg");
         Dimension screenSize =Toolkit.getDefaultToolkit().getScreenSize();
         Image temp= img.getImage().getScaledInstance(screenSize.width,screenSize.height,img.getImage().SCALE_DEFAULT);
         img=new ImageIcon(temp);
