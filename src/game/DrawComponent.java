@@ -29,8 +29,9 @@ public class DrawComponent extends JComponent implements MouseListener, MouseMot
         Image image = new ImageIcon("black1.png").getImage();
         Cursor cursor = tk.createCustomCursor(image, new Point(20, 20), "norm");
         //setCursor(cursor);
-        //TODO：棋子坐标初始化,棋盘初始化
+        //TODO：棋子坐标初始化.
         chessIndexInit();
+        //TODO：棋盘初始化
         this.chessBoard=chessBoard;
     }
     private void chessIndexInit(){
