@@ -14,8 +14,13 @@ import java.util.ArrayList;
 public class DrawComponent extends JComponent implements MouseListener, MouseMotionListener {
     private int mouseIndexX,mouseIndexY;
     private Color[][] chessBoard=new Color[8][8];
+
+    public void setChessBoard(Color[][] chessBoard) {
+        this.chessBoard = chessBoard;
+    }
+
     private Point2D[][] chessIndex=new Point2D[8][8];
-    public  DrawComponent(){
+    public  DrawComponent(Color[][] chessBoard){
         //TODO:加入鼠标事件和监听器
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
@@ -26,7 +31,7 @@ public class DrawComponent extends JComponent implements MouseListener, MouseMot
         //setCursor(cursor);
         //TODO：棋子坐标初始化,棋盘初始化
         chessIndexInit();
-
+        this.chessBoard=chessBoard;
     }
     private void chessIndexInit(){
         int X=188,Y=146;
@@ -34,15 +39,10 @@ public class DrawComponent extends JComponent implements MouseListener, MouseMot
             X=188;
             for (int j=0;j<8;j++){
                 chessIndex[i][j]=new Point2D.Double(X,Y);
-                chessBoard[i][j]=Color.NULL;
                 X+=56;
             }
             Y+=56;
         }
-        chessBoard[4][4]=Color.WHITE;
-        chessBoard[4][5]=Color.BLACK;
-        chessBoard[5][4]=Color.BLACK;
-        chessBoard[5][5]=Color.WHITE;
     }
     @Override
     public void paintComponent(Graphics g){
@@ -55,7 +55,10 @@ public class DrawComponent extends JComponent implements MouseListener, MouseMot
             g.drawImage(chessBoardImage,167,125,490,495,null);
             for (int i=0;i<8;i++){
                 for (int j=0;j<8;j++){
-                    g.drawImage(blackImage1,(int)chessIndex[i][j].getX(),(int)chessIndex[i][j].getY(),56,56,null);
+                    if(chessBoard[i][j]==Color.BLACK)
+                        g.drawImage(blackImage1,(int)chessIndex[i][j].getX(),(int)chessIndex[i][j].getY(),56,56,null);
+                    if(chessBoard[i][j]==Color.WHITE)
+                        g.drawImage(whiteImage1,(int)chessIndex[i][j].getX(),(int)chessIndex[i][j].getY(),56,56,null);
                 }
             }
         } catch (IOException e) {
