@@ -32,11 +32,11 @@ public class MainFrame extends JFrame {
         jLabelBackGround.setBounds(0,0,screenSize.width,screenSize.height);
         this.getRootPane().add(jLabelBackGround);
         ((JPanel)this.getContentPane()).setOpaque(false);
-        //TODO：加入画图组件
-        DrawComponent drawComponent=new DrawComponent();
-        this.add(drawComponent);
         //TODO：初始化棋盘
         this.chessBoard = chessBoardInit();
+        //TODO：加入画图组件
+        DrawComponent drawComponent= new DrawComponent(chessBoard);
+        this.add(drawComponent);
     }
     //TODO：居中用的函数
     private void center(){
@@ -53,10 +53,10 @@ public class MainFrame extends JFrame {
                 chessBoard[i][j] = Color.NULL;
             }
         }
+        chessBoard[3][3]=Color.WHITE;
+        chessBoard[3][4]=Color.BLACK;
+        chessBoard[4][3]=Color.BLACK;
         chessBoard[4][4]=Color.WHITE;
-        chessBoard[4][5]=Color.BLACK;
-        chessBoard[5][4]=Color.BLACK;
-        chessBoard[5][5]=Color.WHITE;
         return chessBoard;
     }
     //TODO：判断能否落子
