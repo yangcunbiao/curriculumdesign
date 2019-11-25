@@ -60,77 +60,76 @@ public class MainFrame extends JFrame {
         return chessBoard;
     }
     //TODO：判断能否落子
-    private boolean judge(int x,int y,int color){
-        Chess[][] chesses = new Chess[8][8];
+    private boolean judge(int x,int y,Color color){
         int drapFlag = 0;
-        if(chesses[x][y] != null) {
+        if(chessBoard[x][y] != Color.NULL) {
             //TODO：判断左
-            if(chesses[x][y-1].getColor() != color && drapFlag !=0){
+            if(chessBoard[x][y-1] != color && drapFlag !=0){
                 for(int i=y-2;i>=0;i--){
-                    if(chesses[x][i].getColor() == color){
+                    if(chessBoard[x][i] == color){
                         drapFlag = 1;
                         break;
                     }
                 }
             }
             //TODO：判断右
-            if(chesses[x][y+1].getColor() != color && drapFlag !=0){
+            if(chessBoard[x][y+1] != color && drapFlag !=0){
                 for(int i=y+2;i<8;i++){
-                    if(chesses[x][i].getColor() == color){
+                    if(chessBoard[x][i] == color){
                         drapFlag = 1;
                         break;
                     }
                 }
             }
             //TODO：判断上
-            if(chesses[x-1][y].getColor() != color && drapFlag !=0){
+            if(chessBoard[x-1][y] != color && drapFlag !=0){
                 for(int i=x-2;i>=0;i--){
-                    if(chesses[i][y].getColor() == color){
+                    if(chessBoard[i][y] == color){
                         drapFlag = 1;
                         break;
                     }
                 }
             }
             //TODO：判断下
-            if(chesses[x+1][y].getColor() != color && drapFlag !=0){
+            if(chessBoard[x+1][y] != color && drapFlag !=0){
                 for(int i=x+2;i<8;i++){
-                    if(chesses[i][y].getColor() == color){
+                    if(chessBoard[i][y] == color){
                         drapFlag = 1;
                         break;
                     }
                 }
             }
             //TODO：判断左上
-            if(chesses[x-1][y-1].getColor() != color && drapFlag !=0){
+            if(chessBoard[x-1][y-1]!= color && drapFlag !=0){
                 for(int i=2;x-i>=0&&y-i>=0;i++){
-                    if(chesses[x-i][y-i].getColor() == color){
+                    if(chessBoard[x-i][y-i] == color){
                         drapFlag = 1;
                         break;
                     }
                 }
             }
             //TODO：判断右上
-            if(chesses[x-1][y+1].getColor() != color && drapFlag !=0){
+            if(chessBoard[x-1][y+1] != color && drapFlag !=0){
                 for(int i=2;x-i>=0&&y+i<8;i++){
-                    if(chesses[x-i][y+i].getColor() == color){
+                    if(chessBoard[x-i][y+i] == color){
                         drapFlag = 1;
                         break;
                     }
                 }
             }
             //TODO：判断左下
-            if(chesses[x+1][y-1].getColor() != color && drapFlag !=0){
+            if(chessBoard[x+1][y-1] != color && drapFlag !=0){
                 for(int i=2;x+i<8&&y-i>=0;i++){
-                    if(chesses[x+i][y-i].getColor() == color){
+                    if(chessBoard[x+i][y-i] == color){
                         drapFlag = 1;
                         break;
                     }
                 }
             }
             //TODO：判断右下
-            if(chesses[x+1][y+1].getColor() != color && drapFlag !=0){
+            if(chessBoard[x+1][y+1] != color && drapFlag !=0){
                 for(int i=2;x+i<8&&y+i<8;i++){
-                    if(chesses[x+i][y+i].getColor() == color){
+                    if(chessBoard[x+i][y+i] == color){
                         drapFlag = 1;
                         break;
                     }
