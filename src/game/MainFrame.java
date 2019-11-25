@@ -5,6 +5,8 @@ import java.awt.*;
 import java.net.URL;
 
 public class MainFrame extends JFrame {
+    //存放棋子的数组
+    private Color[][] chessBoard;
     //窗口的宽和高
     private final int mainWindowWidth=824,mainWondowHeight=738;
     public MainFrame(){
@@ -33,7 +35,8 @@ public class MainFrame extends JFrame {
         //TODO：加入画图组件
         DrawComponent drawComponent=new DrawComponent();
         this.add(drawComponent);
-
+        //TODO：初始化棋盘
+        this.chessBoard = chessBoardInit();
     }
     //TODO：居中用的函数
     private void center(){
@@ -42,8 +45,22 @@ public class MainFrame extends JFrame {
         int screenHeight = screenSize.height;
         this.setLocation(screenWidth/2-mainWindowWidth/2,screenHeight/2-mainWondowHeight/2);
     }
+    //TODO：初始化棋盘
+    private Color[][] chessBoardInit(){
+        Color[][] chessBoard = new Color[8][8];
+        for(int i=0;i<8;i++){
+            for(int j=0;j<8;j++){
+                chessBoard[i][j] = Color.NULL;
+            }
+        }
+        chessBoard[4][4]=Color.WHITE;
+        chessBoard[4][5]=Color.BLACK;
+        chessBoard[5][4]=Color.BLACK;
+        chessBoard[5][5]=Color.WHITE;
+        return chessBoard;
+    }
     //TODO：判断能否落子
-    private void judge(int x,int y,int color){
+    private boolean judge(int x,int y,int color){
         Chess[][] chesses = new Chess[8][8];
         int drapFlag = 0;
         if(chesses[x][y] != null) {
@@ -119,6 +136,11 @@ public class MainFrame extends JFrame {
                     }
                 }
             }
+        }
+        if(drapFlag == 1){
+            return true;
+        } else{
+            return false;
         }
     }
     //TODO：判断输赢
