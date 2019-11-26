@@ -2,9 +2,14 @@ package game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.net.URL;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements MouseMotionListener, MouseListener {
+    //现在下的棋子颜色
+    private Color nowColor=Color.BLACK;
     //存放棋子的数组
     private Color[][] chessBoard;
     //窗口的宽和高
@@ -37,6 +42,7 @@ public class MainFrame extends JFrame {
         //TODO：加入画图组件
         DrawComponent drawComponent= new DrawComponent(chessBoard);
         this.add(drawComponent);
+
     }
     //TODO：居中用的函数
     private void center(){
@@ -59,91 +65,39 @@ public class MainFrame extends JFrame {
         chessBoard[4][4]=Color.WHITE;
         return chessBoard;
     }
-    //TODO：判断能否落子
-    private boolean judge(int x,int y,Color color){
-        int drapFlag = 0;
-        if(chessBoard[x][y] != Color.NULL) {
-            //TODO：判断左
-            if(chessBoard[x][y-1] != color && drapFlag !=0){
-                for(int i=y-2;i>=0;i--){
-                    if(chessBoard[x][i] == color){
-                        drapFlag = 1;
-                        break;
-                    }
-                }
-            }
-            //TODO：判断右
-            if(chessBoard[x][y+1] != color && drapFlag !=0){
-                for(int i=y+2;i<8;i++){
-                    if(chessBoard[x][i] == color){
-                        drapFlag = 1;
-                        break;
-                    }
-                }
-            }
-            //TODO：判断上
-            if(chessBoard[x-1][y] != color && drapFlag !=0){
-                for(int i=x-2;i>=0;i--){
-                    if(chessBoard[i][y] == color){
-                        drapFlag = 1;
-                        break;
-                    }
-                }
-            }
-            //TODO：判断下
-            if(chessBoard[x+1][y] != color && drapFlag !=0){
-                for(int i=x+2;i<8;i++){
-                    if(chessBoard[i][y] == color){
-                        drapFlag = 1;
-                        break;
-                    }
-                }
-            }
-            //TODO：判断左上
-            if(chessBoard[x-1][y-1]!= color && drapFlag !=0){
-                for(int i=2;x-i>=0&&y-i>=0;i++){
-                    if(chessBoard[x-i][y-i] == color){
-                        drapFlag = 1;
-                        break;
-                    }
-                }
-            }
-            //TODO：判断右上
-            if(chessBoard[x-1][y+1] != color && drapFlag !=0){
-                for(int i=2;x-i>=0&&y+i<8;i++){
-                    if(chessBoard[x-i][y+i] == color){
-                        drapFlag = 1;
-                        break;
-                    }
-                }
-            }
-            //TODO：判断左下
-            if(chessBoard[x+1][y-1] != color && drapFlag !=0){
-                for(int i=2;x+i<8&&y-i>=0;i++){
-                    if(chessBoard[x+i][y-i] == color){
-                        drapFlag = 1;
-                        break;
-                    }
-                }
-            }
-            //TODO：判断右下
-            if(chessBoard[x+1][y+1] != color && drapFlag !=0){
-                for(int i=2;x+i<8&&y+i<8;i++){
-                    if(chessBoard[x+i][y+i] == color){
-                        drapFlag = 1;
-                        break;
-                    }
-                }
-            }
-        }
-        if(drapFlag == 1){
-            return true;
-        } else{
-            return false;
-        }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
     }
-    //TODO：判断输赢
-    private void judgeIsWin(){
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
 
     }
 }

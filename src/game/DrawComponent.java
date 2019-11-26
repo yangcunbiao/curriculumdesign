@@ -9,9 +9,8 @@ import java.awt.event.MouseMotionListener;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
-public class DrawComponent extends JComponent implements MouseListener, MouseMotionListener {
+public class DrawComponent extends JComponent {
     private int mouseIndexX,mouseIndexY;
     private Color[][] chessBoard=new Color[8][8];
 
@@ -21,9 +20,6 @@ public class DrawComponent extends JComponent implements MouseListener, MouseMot
 
     private Point2D[][] chessIndex=new Point2D[8][8];
     public  DrawComponent(Color[][] chessBoard){
-        //TODO:加入鼠标事件和监听器
-        this.addMouseListener(this);
-        this.addMouseMotionListener(this);
         //TODO:把鼠标光标变为棋子
         Toolkit tk = Toolkit.getDefaultToolkit();
         Image image = new ImageIcon("black1.png").getImage();
@@ -68,38 +64,4 @@ public class DrawComponent extends JComponent implements MouseListener, MouseMot
 
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        System.out.println(e.getX()+","+e.getY());
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
 }
