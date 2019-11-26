@@ -5,9 +5,12 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.net.URL;
+import java.awt.geom.Point2D;
 
-public class MainFrame extends JFrame implements MouseMotionListener, MouseListener {
+
+public class MainFrame<Pair> extends JFrame implements MouseMotionListener, MouseListener {
+    //鼠标坐标
+    private int mouseIndexX,mouseIndexY;
     //现在下的棋子颜色
     private Color nowColor=Color.BLACK;
     //存放棋子的数组
@@ -64,6 +67,9 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
         chessBoard[4][3]=Color.BLACK;
         chessBoard[4][4]=Color.WHITE;
         return chessBoard;
+    }
+    private Pair getIndex(Point2D mouse){
+
     }
 
     @Override

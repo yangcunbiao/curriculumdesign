@@ -2,7 +2,7 @@ package game;
 
 public class Judge {
     //TODO：判断能否落子
-    private boolean judgeDrap(int x,int y,Color color,Color[][] chessBoard){
+    private static boolean judgeDrap(int x,int y,Color color,Color[][] chessBoard){
         int drapFlag = 0;
         if(chessBoard[x][y] != Color.NULL) {
             //TODO：判断左
@@ -85,7 +85,7 @@ public class Judge {
         }
     }
     //TODO：判断输赢
-    private void judgeIsOver(){
+    private static void judgeIsOver(){
 
     }
 }

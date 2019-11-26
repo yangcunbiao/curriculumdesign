@@ -3,15 +3,12 @@ package game;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 
 public class DrawComponent extends JComponent {
-    private int mouseIndexX,mouseIndexY;
     private Color[][] chessBoard=new Color[8][8];
 
     public void setChessBoard(Color[][] chessBoard) {
