@@ -14,30 +14,31 @@ public class DrawComponent extends JComponent {
     public void setChessBoard(Color[][] chessBoard) {
         this.chessBoard = chessBoard;
     }
-
+    //棋子坐标
     private Point2D[][] chessIndex=new Point2D[8][8];
-    public  DrawComponent(Color[][] chessBoard){
+
+    public  DrawComponent(Color[][] chessBoard,Point2D[][] chessIndex){
         //TODO:把鼠标光标变为棋子
         Toolkit tk = Toolkit.getDefaultToolkit();
         Image image = new ImageIcon("black1.png").getImage();
         Cursor cursor = tk.createCustomCursor(image, new Point(20, 20), "norm");
         //setCursor(cursor);
         //TODO：棋子坐标初始化.
-        chessIndexInit();
+        this.chessIndex=chessIndex;
         //TODO：棋盘初始化
         this.chessBoard=chessBoard;
     }
-    private void chessIndexInit(){
-        int X=188,Y=146;
-        for (int i=0;i<8;i++){
-            X=188;
-            for (int j=0;j<8;j++){
-                chessIndex[i][j]=new Point2D.Double(X,Y);
-                X+=56;
-            }
-            Y+=56;
-        }
-    }
+//    private void chessIndexInit(){
+//        int X=188,Y=146;
+//        for (int i=0;i<8;i++){
+//            X=188;
+//            for (int j=0;j<8;j++){
+//                chessIndex[i][j]=new Point2D.Double(X,Y);
+//                X+=56;
+//            }
+//            Y+=56;
+//        }
+//    }
     @Override
     public void paintComponent(Graphics g){
         Image chessBoardImage=null,blackImage1=null,whiteImage1=null;
