@@ -97,6 +97,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
                 for (; j < 8; j++) {
                     if(mouse.getY()>=chessIndex[i][j].getY()&&mouse.getY()<chessIndex[i][j].getY()+chessboardFieldWidth){
                         index=new Point(i,j);
+                        return index;
                     }
                 }
             }
