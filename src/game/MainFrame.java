@@ -100,6 +100,11 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
         return index;
     }
 
+    //TODO:翻转棋子
+    private void flip(int x,int y){
+
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         mouseIndexX=e.getX();
