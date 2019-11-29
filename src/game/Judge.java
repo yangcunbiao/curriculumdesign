@@ -1,91 +1,45 @@
 package game;
 
 public class Judge {
-    //TODO：判断能否落子
-    private static boolean judgeDrap(int x,int y,Color color,Color[][] chessBoard){
-        int drapFlag = 0;
-        if(chessBoard[x][y] != Color.NULL) {
-            //TODO：判断左
-            if(chessBoard[x][y-1] != color && drapFlag !=0){
-                for(int i=y-2;i>=0;i--){
-                    if(chessBoard[x][i] == color){
-                        drapFlag = 1;
-                        break;
-                    }
-                }
-            }
-            //TODO：判断右
-            if(chessBoard[x][y+1] != color && drapFlag !=0){
-                for(int i=y+2;i<8;i++){
-                    if(chessBoard[x][i] == color){
-                        drapFlag = 1;
-                        break;
-                    }
-                }
-            }
-            //TODO：判断上
-            if(chessBoard[x-1][y] != color && drapFlag !=0){
-                for(int i=x-2;i>=0;i--){
-                    if(chessBoard[i][y] == color){
-                        drapFlag = 1;
-                        break;
-                    }
-                }
-            }
-            //TODO：判断下
-            if(chessBoard[x+1][y] != color && drapFlag !=0){
-                for(int i=x+2;i<8;i++){
-                    if(chessBoard[i][y] == color){
-                        drapFlag = 1;
-                        break;
-                    }
-                }
-            }
-            //TODO：判断左上
-            if(chessBoard[x-1][y-1]!= color && drapFlag !=0){
-                for(int i=2;x-i>=0&&y-i>=0;i++){
-                    if(chessBoard[x-i][y-i] == color){
-                        drapFlag = 1;
-                        break;
-                    }
-                }
-            }
-            //TODO：判断右上
-            if(chessBoard[x-1][y+1] != color && drapFlag !=0){
-                for(int i=2;x-i>=0&&y+i<8;i++){
-                    if(chessBoard[x-i][y+i] == color){
-                        drapFlag = 1;
-                        break;
-                    }
-                }
-            }
-            //TODO：判断左下
-            if(chessBoard[x+1][y-1] != color && drapFlag !=0){
-                for(int i=2;x+i<8&&y-i>=0;i++){
-                    if(chessBoard[x+i][y-i] == color){
-                        drapFlag = 1;
-                        break;
-                    }
-                }
-            }
-            //TODO：判断右下
-            if(chessBoard[x+1][y+1] != color && drapFlag !=0){
-                for(int i=2;x+i<8&&y+i<8;i++){
-                    if(chessBoard[x+i][y+i] == color){
-                        drapFlag = 1;
-                        break;
+    //TODO:判断能否落子
+    public static boolean judgeDrap(int x,int y,Color color,Color[][] chessboard){
+        if(isInside(x,y)==false||chessboard[x][y]!=Color.NULL)return false;
+        for (int offsetX=-1;offsetX<=1;offsetX++){
+            for (int offsetY=-1;offsetY<=1;offsetY++){
+                if(offsetX==0&&offsetY==0)continue;
+                int indexX=offsetX+x,indexY=offsetY+y;
+                if(isInside(indexX,indexY)&&chessboard[indexX][indexY].isSame(color)==false){
+                    for (int i=indexX+offsetX,j=indexY+offsetY;isInside(i,j);i+=offsetX,j+=offsetY){
+                        if(chessboard[i][j]==Color.NULL){
+                            break;
+                        }else if(chessboard[i][j]==color){
+                            return true;
+                        }
                     }
                 }
             }
         }
-        if(drapFlag == 1){
-            return true;
-        } else{
-            return false;
-        }
+        return false;
     }
-    //TODO：判断输赢
-    private static void judgeIsOver(){
+    //TODO:判断输赢
+    public static boolean judgeIsOver(){
 
+
+        return true;
+    }
+    //TODO:判断是否有子可落
+    public static boolean isStalemate(Color color,Color[][] chessboard){
+        for (int i=0;i<8;i++){
+            for (int j=0;j<8;j++){
+                if(chessboard[i][j]==Color.NULL){
+                    return judgeDrap(i,j,color,chessboard);
+                }
+            }
+        }
+        return false;
+    }
+    //TODO:判断当前的坐标是否在棋盘内
+    public static boolean isInside(int x,int y){
+        return (x>=0&&x<8&&y>=0&&y<8);
     }
 }
