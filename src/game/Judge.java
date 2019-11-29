@@ -22,10 +22,13 @@ public class Judge {
         return false;
     }
     //TODO:判断输赢
-    public static boolean judgeIsOver(){
-
-
-        return true;
+    public static boolean judgeIsOver(Color[][] chessboard){
+        if(isStalemate(Color.BLACK,chessboard) && isStalemate(Color.WHITE,chessboard)) {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     //TODO:判断是否有子可落
     public static boolean isStalemate(Color color,Color[][] chessboard){
