@@ -59,7 +59,26 @@ public class DrawComponent extends JComponent {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
+    public void drawCanDrap(Point2D point,Graphics g){
+        int x = (int) point.getX()+28;
+        int y = (int) point.getY()+28;
+        g.setColor(java.awt.Color.RED);
+        //TODO：画十字
+        g.drawLine(x-5,y,x+5,y);
+        g.drawLine(x,y-5,x,y+5);
+        //TODO：画左上
+        g.drawLine(x-26,y-26,x-21,y-26);
+        g.drawLine(x-26,y-26,x-26,y-21);
+        //TODO：画右上
+        g.drawLine(x+26,y-26,x+21,y-26);
+        g.drawLine(x+26,y-26,x+26,y-21);
+        //TODO：画左下
+        g.drawLine(x-26,y+26,x-21,y+26);
+        g.drawLine(x-26,y+26,x-26,y+21);
+        //TODO：画右下
+        g.drawLine(x+26,y+26,x+21,y+26);
+        g.drawLine(x+26,y+26,x+26,y+21);
+    }
 }
