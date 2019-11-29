@@ -8,7 +8,7 @@ public class Judge {
             for (int offsetY=-1;offsetY<=1;offsetY++){
                 if(offsetX==0&&offsetY==0)continue;
                 int indexX=offsetX+x,indexY=offsetY+y;
-                if(isInside(indexX,indexY)&&chessboard[indexX][indexY].isSame(color)==false){
+                if(isInside(indexX,indexY)&&chessboard[indexX][indexY].isSame(color)==false&&chessboard[indexX][indexY]!=Color.NULL){
                     for (int i=indexX+offsetX,j=indexY+offsetY;isInside(i,j);i+=offsetX,j+=offsetY){
                         if(chessboard[i][j]==Color.NULL){
                             break;
@@ -21,7 +21,7 @@ public class Judge {
         }
         return false;
     }
-    //TODO:判断输赢
+    //TODO:判断是否结束
     public static boolean judgeIsOver(){
 
 
@@ -32,7 +32,9 @@ public class Judge {
         for (int i=0;i<8;i++){
             for (int j=0;j<8;j++){
                 if(chessboard[i][j]==Color.NULL){
-                    return judgeDrap(i,j,color,chessboard);
+                    if(judgeDrap(i,j,color,chessboard)){
+                        return true;
+                    }
                 }
             }
         }

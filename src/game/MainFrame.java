@@ -110,7 +110,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
             for (int offsetY=-1;offsetY<=1;offsetY++){
                 if(offsetX==0&&offsetY==0)continue;
                 int indexX=offsetX+x,indexY=offsetY+y;
-                if(Judge.isInside(indexX,indexY)&&chessboard[indexX][indexY].isSame(nowColor)==false){
+                if(Judge.isInside(indexX,indexY)&&chessboard[indexX][indexY].isSame(nowColor)==false&&chessboard[indexX][indexY]!=Color.NULL){
                     int flipNum=1;
                     for (int i=indexX+offsetX,j=indexY+offsetY;Judge.isInside(i,j);i+=offsetX,j+=offsetY){
                         if(chessboard[i][j]==Color.NULL){
@@ -140,16 +140,24 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 
     @Override
     public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
         Point index=getIndex(new Point2D.Double(e.getX(),e.getY()));
         mouseIndexX=(int)index.getX();
         mouseIndexY=(int)index.getY();
-        if(Judge.judgeDrap(mouseIndexX,mouseIndexY,nowColor,chessboard)){
-            chessboard[mouseIndexX][mouseIndexY]=nowColor;
+        if (Judge.judgeDrap(mouseIndexX, mouseIndexY, nowColor, chessboard)) {
+            chessboard[mouseIndexX][mouseIndexY] = nowColor;
             System.out.println(1);
-            flipChess(mouseIndexX,mouseIndexY);
+            flipChess(mouseIndexX, mouseIndexY);
+            drawComponent.setchessboard(chessboard);
+            if(Judge.isStalemate(filpColor(nowColor),chessboard)) {
+                nowColor = filpColor(nowColor);
+            }
         }
-        drawComponent.setchessboard(chessboard);
-        nowColor=filpColor(nowColor);
+        System.out.println(nowColor);
         //System.out.println("1");
         //-----------------------------------------------------------//
 //        for(int i=0;i<8;i++){
@@ -160,11 +168,6 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 //        }
         //-----------------------------------------------------------//
         drawComponent.repaint();
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
     }
 
     @Override
