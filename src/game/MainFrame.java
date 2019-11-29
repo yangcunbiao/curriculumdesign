@@ -54,6 +54,9 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
         //TODO：加入画图组件
         drawComponent= new DrawComponent(chessboard,chessIndex);
         this.add(drawComponent);
+        //TODO:加入鼠标事件和监听器
+        this.addMouseListener(this);
+        this.addMouseMotionListener(this);
 
     }
     //TODO：居中用的函数
@@ -77,14 +80,15 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 
         int X=188,Y=146;
         for (int i=0;i<8;i++){
-            X=188;
+            Y=146;
             for (int j=0;j<8;j++){
                 chessIndex[i][j]=new Point2D.Double(X,Y);
-                X+=chessboardFieldWidth;
+                Y+=chessboardFieldWidth;
             }
-            Y+=chessboardFieldWidth;
+            X+=chessboardFieldWidth;
         }
     }
+    //TODO:得到鼠标的棋盘坐标
     private Point getIndex(Point2D mouse){
         int i=0,j=0;
         Point index=new Point(100,100);
@@ -101,18 +105,61 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
     }
 
     //TODO:翻转棋子
-    private void flip(int x,int y){
+    private void flipChess(int x,int y){
+        for (int offsetX=-1;offsetX<=1;offsetX++){
+            for (int offsetY=-1;offsetY<=1;offsetY++){
+                if(offsetX==0&&offsetY==0)continue;
+                int indexX=offsetX+x,indexY=offsetY+y;
+                if(Judge.isInside(indexX,indexY)&&chessboard[indexX][indexY].isSame(nowColor)==false){
+                    int flipNum=1;
+                    for (int i=indexX+offsetX,j=indexY+offsetY;Judge.isInside(i,j);i+=offsetX,j+=offsetY){
+                        if(chessboard[i][j]==Color.NULL){
+                            break;
+                        }else if(chessboard[i][j]==nowColor){
+                            for (int k=1;k<=flipNum;k++){
+                                chessboard[x+k*offsetX][y+k*offsetY]=nowColor;
+                            }
+                            break;
+                        }else {
+                            flipNum++;
+                        }
+                    }
+                }
+            }
+        }
 
+    }
+    //TODO:转换棋子颜色
+    private Color filpColor(Color color){
+        if (color.isSame(Color.WHITE)){
+            return Color.BLACK;
+        }else{
+            return Color.WHITE;
+        }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        mouseIndexX=e.getX();
-        mouseIndexY=e.getY();
+        Point index=getIndex(new Point2D.Double(e.getX(),e.getY()));
+        mouseIndexX=(int)index.getX();
+        mouseIndexY=(int)index.getY();
         if(Judge.judgeDrap(mouseIndexX,mouseIndexY,nowColor,chessboard)){
             chessboard[mouseIndexX][mouseIndexY]=nowColor;
-
+            System.out.println(1);
+            flipChess(mouseIndexX,mouseIndexY);
         }
+        drawComponent.setchessboard(chessboard);
+        nowColor=filpColor(nowColor);
+        //System.out.println("1");
+        //-----------------------------------------------------------//
+//        for(int i=0;i<8;i++){
+//            for (int j=0;j<8;j++){
+//                System.out.print(chessboard[i][j]+" ");
+//            }
+//            System.out.println();
+//        }
+        //-----------------------------------------------------------//
+        drawComponent.repaint();
     }
 
     @Override
