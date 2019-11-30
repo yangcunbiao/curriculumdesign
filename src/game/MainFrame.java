@@ -19,7 +19,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
     //棋子坐标
     private Point2D[][] chessIndex=new Point2D[8][8];
     //棋格宽度
-    private int chessboardFieldWidth=56;
+    private int chessboardFieldWidth=62;
     //现在下的棋子颜色
     private Color nowColor=Color.BLACK;
     //存放棋子的数组
@@ -77,24 +77,31 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
         chessboard[3][4]=Color.BLACK;
         chessboard[4][3]=Color.BLACK;
         chessboard[4][4]=Color.WHITE;
+//        for (int i=0;i<8;i++){
+//            chessboard[i][7]=Color.BLACK;
+//        }
+//        for (int i=0;i<8;i++){
+//            chessboard[i][6]=Color.WHITE;
+//        }
 
-        int X=188,Y=146;
+
+        int X=160,Y=160;
         for (int i=0;i<8;i++){
-            Y=146;
+            X=160;
             for (int j=0;j<8;j++){
                 chessIndex[i][j]=new Point2D.Double(X,Y);
-                Y+=chessboardFieldWidth;
+                X+=chessboardFieldWidth;
             }
-            X+=chessboardFieldWidth;
+            Y+=chessboardFieldWidth;
         }
     }
     //TODO:得到鼠标的棋盘坐标
     private Point getIndex(Point2D mouse){
         int i=0,j=0;
         Point index=new Point(100,100);
-        for (;i<8;i++){
-            if(mouse.getX()>=chessIndex[i][0].getX()&&mouse.getX()<chessIndex[i][0].getX()+chessboardFieldWidth) {
-                for (; j < 8; j++) {
+        for (;j<8;j++){
+            if(mouse.getX()>=chessIndex[0][j].getX()&&mouse.getX()<chessIndex[0][j].getX()+chessboardFieldWidth) {
+                for (; i < 8; i++) {
                     if(mouse.getY()>=chessIndex[i][j].getY()&&mouse.getY()<chessIndex[i][j].getY()+chessboardFieldWidth){
                         index=new Point(i,j);
                         return index;
@@ -146,6 +153,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 
     @Override
     public void mousePressed(MouseEvent e) {
+        System.out.println(e.getX()+","+e.getY());
         Point index=getIndex(new Point2D.Double(e.getX(),e.getY()));
         mouseIndexX=(int)index.getX();
         mouseIndexY=(int)index.getY();
@@ -157,17 +165,18 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
             if(Judge.isStalemate(filpColor(nowColor),chessboard)) {
                 nowColor = filpColor(nowColor);
             }
+            if(Judge.judgeIsOver(chessboard)){
+                counter.count(chessboard);
+                if(counter.getPlayerNum1()>counter.getPlayerNum2()){
+                    System.out.println("黑棋胜");
+                }else if(counter.getPlayerNum1()<counter.getPlayerNum2()){
+                    System.out.println("白棋胜");
+                }else {
+                    System.out.println("平局");
+                }
+            }
         }
         System.out.println(nowColor);
-        //System.out.println("1");
-        //-----------------------------------------------------------//
-//        for(int i=0;i<8;i++){
-//            for (int j=0;j<8;j++){
-//                System.out.print(chessboard[i][j]+" ");
-//            }
-//            System.out.println();
-//        }
-        //-----------------------------------------------------------//
         drawComponent.repaint();
     }
 

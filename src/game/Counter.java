@@ -8,6 +8,15 @@ public class Counter {
         this.playerNum1=playerNum1;
         this.playerNum2=playerNum2;
     }
+
+    public int getPlayerNum1() {
+        return playerNum1;
+    }
+
+    public int getPlayerNum2() {
+        return playerNum2;
+    }
+
     public void count(Color[][] chessboard){
         int blackNum=0,whiteNum=0;
         for (int i=0;i<8;i++){

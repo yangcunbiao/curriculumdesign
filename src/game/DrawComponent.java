@@ -28,17 +28,7 @@ public class DrawComponent extends JComponent {
         //TODO：棋盘初始化
         this.chessboard=chessboard;
     }
-//    private void chessIndexInit(){
-//        int X=188,Y=146;
-//        for (int i=0;i<8;i++){
-//            X=188;
-//            for (int j=0;j<8;j++){
-//                chessIndex[i][j]=new Point2D.Double(X,Y);
-//                X+=56;
-//            }
-//            Y+=56;
-//        }
-//    }
+
     @Override
     public void paintComponent(Graphics g){
         Image chessboardImage=null,blackImage1=null,whiteImage1=null;
@@ -47,13 +37,14 @@ public class DrawComponent extends JComponent {
             chessboardImage = ImageIO.read(new File("chessboard.png"));
             blackImage1 = ImageIO.read(new File("black1.png"));
             whiteImage1 = ImageIO.read(new File("white1.png"));
-            g.drawImage(chessboardImage,167,125,490,495,null);
+            g.drawImage(chessboardImage,127,105,null);
+            //g.drawImage(blackImage1,149,127,null);
             for (int i=0;i<8;i++){
                 for (int j=0;j<8;j++){
                     if(chessboard[i][j]==Color.BLACK)
-                        g.drawImage(blackImage1,(int)chessIndex[i][j].getX(),(int)chessIndex[i][j].getY(),56,56,null);
+                        g.drawImage(blackImage1,(int)chessIndex[i][j].getX()-9,(int)chessIndex[i][j].getY()-31,null);
                     if(chessboard[i][j]==Color.WHITE)
-                        g.drawImage(whiteImage1,(int)chessIndex[i][j].getX(),(int)chessIndex[i][j].getY(),56,56,null);
+                        g.drawImage(whiteImage1,(int)chessIndex[i][j].getX()-9,(int)chessIndex[i][j].getY()-31,null);
                 }
             }
         } catch (IOException e) {
