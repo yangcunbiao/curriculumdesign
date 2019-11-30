@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class DrawComponent extends JComponent {
+    //翻转图片集
+    private Image[] images = new Image[8];
+
     private Color[][] chessboard=new Color[8][8];
 
     public void setchessboard(Color[][] chessboard) {
@@ -27,6 +30,19 @@ public class DrawComponent extends JComponent {
         this.chessIndex=chessIndex;
         //TODO：棋盘初始化
         this.chessboard=chessboard;
+        //TODO：图片集初始化
+        try {
+            images[0] = ImageIO.read(new File("black4.png"));
+            images[1] = ImageIO.read(new File("black5.png"));
+            images[2] = ImageIO.read(new File("black6.png"));
+            images[3] = ImageIO.read(new File("black7.png"));
+            images[4] = ImageIO.read(new File("black8.png"));
+            images[5] = ImageIO.read(new File("black9.png"));
+            images[6] = ImageIO.read(new File("black10.png"));
+            images[7] = ImageIO.read(new File("black11.png"));
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -53,23 +69,23 @@ public class DrawComponent extends JComponent {
     }
 
     public void drawCanDrap(Point2D point,Graphics g){
-        int x = (int) point.getX()+28;
-        int y = (int) point.getY()+28;
+        int x = (int) point.getX()+22;
+        int y = (int) point.getY();
         g.setColor(java.awt.Color.RED);
         //TODO：画十字
         g.drawLine(x-5,y,x+5,y);
         g.drawLine(x,y-5,x,y+5);
         //TODO：画左上
-        g.drawLine(x-26,y-26,x-21,y-26);
-        g.drawLine(x-26,y-26,x-26,y-21);
+        g.drawLine(x-29,y-29,x-22,y-29);
+        g.drawLine(x-29,y-29,x-29,y-22);
         //TODO：画右上
-        g.drawLine(x+26,y-26,x+21,y-26);
-        g.drawLine(x+26,y-26,x+26,y-21);
+        g.drawLine(x+29,y-29,x+22,y-29);
+        g.drawLine(x+29,y-29,x+29,y-22);
         //TODO：画左下
-        g.drawLine(x-26,y+26,x-21,y+26);
-        g.drawLine(x-26,y+26,x-26,y+21);
+        g.drawLine(x-29,y+29,x-22,y+29);
+        g.drawLine(x-29,y+29,x-29,y+22);
         //TODO：画右下
-        g.drawLine(x+26,y+26,x+21,y+26);
-        g.drawLine(x+26,y+26,x+26,y+21);
+        g.drawLine(x+29,y+29,x+22,y+29);
+        g.drawLine(x+29,y+29,x+29,y+22);
     }
 }
