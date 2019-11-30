@@ -20,6 +20,7 @@ public class LoginFrame extends JFrame {
         this.center();
         //TODO：设置背景
 
+        //TODO：
     }
     //TODO：居中用的函数
     private void center(){
