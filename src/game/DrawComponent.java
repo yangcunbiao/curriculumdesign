@@ -17,6 +17,8 @@ public class DrawComponent extends JComponent {
     //存棋盘上的棋子
     private Color[][] chessboard=new Color[8][8];
 
+    //十字光标坐标
+    private Point crossIndex=null;
 
     public void setchessboard(Color[][] chessboard) {
         this.chessboard = chessboard;
@@ -25,6 +27,11 @@ public class DrawComponent extends JComponent {
     private Timer timer=new Timer();
     //棋子翻转的图片下标
     private int sub=-1;
+
+    public void setCrossIndex(Point crossIndex) {
+        this.crossIndex = crossIndex;
+    }
+
     //棋子坐标
     private Point2D[][] chessIndex;
 
@@ -135,6 +142,7 @@ public class DrawComponent extends JComponent {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if(crossIndex!=null)drawCanDrap(chessIndex[crossIndex.x][crossIndex.y],g);
     }
 
     public void drawCanDrap(Point2D point,Graphics g){

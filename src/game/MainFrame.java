@@ -220,6 +220,16 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 
     @Override
     public void mouseMoved(MouseEvent e) {
-
+        //System.out.println(e.getX()+","+e.getY());
+        Point index=getIndex(new Point2D.Double(e.getX(),e.getY()));
+        mouseIndexX=(int)index.getX();
+        mouseIndexY=(int)index.getY();
+        if (Judge.judgeDrap(mouseIndexX, mouseIndexY, nowColor, chessboard)){
+            drawComponent.setCrossIndex(index);
+            drawComponent.repaint();
+        }else{
+            drawComponent.setCrossIndex(null);
+            drawComponent.repaint();
+        }
     }
 }
