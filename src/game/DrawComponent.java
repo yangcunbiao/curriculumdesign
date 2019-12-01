@@ -16,12 +16,7 @@ public class DrawComponent extends JComponent {
     private Image[] images = new Image[22];
     //存棋盘上的棋子
     private Color[][] chessboard=new Color[8][8];
-    //翻转棋子的集合
-    //private ArrayList<Point> points;
 
-//    public void setPoints(Point[] points) {
-//        this.points = points;
-//    }
 
     public void setchessboard(Color[][] chessboard) {
         this.chessboard = chessboard;
