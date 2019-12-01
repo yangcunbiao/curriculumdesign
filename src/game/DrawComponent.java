@@ -7,20 +7,21 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class DrawComponent extends JComponent {
     //翻转图片集
-    private Image[] images = new Image[11];
+    private Image[] images = new Image[22];
     //存棋盘上的棋子
     private Color[][] chessboard=new Color[8][8];
     //翻转棋子的集合
-    private Point[] points;
+    //private ArrayList<Point> points;
 
-    public void setPoints(Point[] points) {
-        this.points = points;
-    }
+//    public void setPoints(Point[] points) {
+//        this.points = points;
+//    }
 
     public void setchessboard(Color[][] chessboard) {
         this.chessboard = chessboard;
@@ -29,12 +30,14 @@ public class DrawComponent extends JComponent {
     private Timer timer=new Timer();
     //棋子翻转的图片下标
     private int sub=-1;
-    //是否翻转的标志
-    private boolean starFlip=false;
     //棋子坐标
     private Point2D[][] chessIndex;
 
-    public  DrawComponent(Color[][] chessboard,Point2D[][] chessIndex){
+    public int getSub() {
+        return sub;
+    }
+
+    public  DrawComponent(Color[][] chessboard, Point2D[][] chessIndex){
         //TODO:把鼠标光标变为棋子
         Toolkit tk = Toolkit.getDefaultToolkit();
         Image image = new ImageIcon("black1.png").getImage();
@@ -57,21 +60,63 @@ public class DrawComponent extends JComponent {
             images[8] = ImageIO.read(new File("black9.png"));
             images[9] = ImageIO.read(new File("black10.png"));
             images[10] = ImageIO.read(new File("black11.png"));
+            images[11] = ImageIO.read(new File("white1.png"));
+            images[12] = ImageIO.read(new File("white2.png"));
+            images[13] = ImageIO.read(new File("white3.png"));
+            images[14] = ImageIO.read(new File("white4.png"));
+            images[15] = ImageIO.read(new File("white5.png"));
+            images[16] = ImageIO.read(new File("white6.png"));
+            images[17] = ImageIO.read(new File("white7.png"));
+            images[18] = ImageIO.read(new File("white8.png"));
+            images[19] = ImageIO.read(new File("white9.png"));
+            images[20] = ImageIO.read(new File("white10.png"));
+            images[21] = ImageIO.read(new File("white11.png"));
         }catch (IOException e){
             e.printStackTrace();
         }
+
+    }
+
+    public void flipChess(Color color){
         TimerTask myTask=new TimerTask() {
             @Override
             public void run() {
                 sub++;
                 repaint();
-                if(sub>9)cancel();
+                if(sub>9){
+                    cancel();
+                    for (int i=0;i<8;i++){
+                        for (int j=0;j<8;j++){
+                            chessboard[i][j]=Color.endFlip(chessboard[i][j]);
+                        }
+                    }
+                }
             }
         };
-        timer.schedule(myTask,0,150);
+        TimerTask myTask1=new TimerTask() {
+            @Override
+            public void run() {
+                sub++;
+                repaint();
+                if(sub>20) {
+                    cancel();
+                    for (int i=0;i<8;i++){
+                        for (int j=0;j<8;j++){
+                            chessboard[i][j]=Color.endFlip(chessboard[i][j]);
+                        }
+                    }
+                }
+            }
+        };
+        if(color==Color.BLACK){
+            sub=10;
+            timer.schedule(myTask1,0,100);
+        }else{
+            sub=-1;
+            timer.schedule(myTask,0,100);
+        }
 
     }
-
     @Override
     public void paintComponent(Graphics g){
         Image chessboardImage=null,blackImage1=null,whiteImage1=null;
@@ -80,18 +125,18 @@ public class DrawComponent extends JComponent {
             blackImage1 = ImageIO.read(new File("black1.png"));
             whiteImage1 = ImageIO.read(new File("white1.png"));
             g.drawImage(chessboardImage,127,105,null);
-            if(starFlip) {
-                g.drawImage(images[sub], (int) chessIndex[0][0].getX() - 9, (int) chessIndex[0][0].getY() - 31, null);
-            }else {
-                for (int i = 0; i < 8; i++) {
-                    for (int j = 0; j < 8; j++) {
-                        if (chessboard[i][j] == Color.BLACK)
-                            g.drawImage(blackImage1, (int) chessIndex[i][j].getX() - 9, (int) chessIndex[i][j].getY() - 31, null);
-                        if (chessboard[i][j] == Color.WHITE)
-                            g.drawImage(whiteImage1, (int) chessIndex[i][j].getX() - 9, (int) chessIndex[i][j].getY() - 31, null);
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    if (chessboard[i][j] == Color.BLACK)
+                        g.drawImage(blackImage1, (int) chessIndex[i][j].getX() - 9, (int) chessIndex[i][j].getY() - 31, null);
+                    if (chessboard[i][j] == Color.WHITE)
+                        g.drawImage(whiteImage1, (int) chessIndex[i][j].getX() - 9, (int) chessIndex[i][j].getY() - 31, null);
+                    if(chessboard[i][j] == Color.BLACKTOWHITE || chessboard[i][j] == Color.WHITETOBLACK){
+                        g.drawImage(images[sub], (int) chessIndex[i][j].getX() - 9, (int) chessIndex[i][j].getY() - 31, null);
                     }
                 }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

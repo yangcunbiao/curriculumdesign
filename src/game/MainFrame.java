@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Point2D;
 import java.security.KeyPair;
+import java.util.ArrayList;
 
 
 public class MainFrame extends JFrame implements MouseMotionListener, MouseListener {
@@ -26,6 +27,8 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
     private Color[][] chessboard=new Color[8][8];
     //窗口的宽和高
     private final int mainWindowWidth=824,mainWondowHeight=738;
+
+
     public MainFrame(){
         //TODO:设置窗口的各种信息.
         //TODO：窗口大小
@@ -125,7 +128,11 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
                             break;
                         }else if(chessboard[i][j]==nowColor){
                             for (int k=1;k<=flipNum;k++){
-                                chessboard[x+k*offsetX][y+k*offsetY]=nowColor;
+                                if(nowColor==Color.BLACK) {
+                                    chessboard[x + k * offsetX][y + k * offsetY] = Color.WHITETOBLACK;
+                                }else{
+                                    chessboard[x + k * offsetX][y + k * offsetY] = Color.BLACKTOWHITE;
+                                }
                             }
                             break;
                         }else {
@@ -148,7 +155,10 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+//        flipChessIndex.add(new Point(0,0));
+//        flipChessIndex.add(new Point(1,0));
+//        flipChessIndex.add(new Point(2,0));
+//        drawComponent.flipChess(nowColor);
     }
 
     @Override
@@ -162,6 +172,14 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
             System.out.println(1);
             flipChess(mouseIndexX, mouseIndexY);
             drawComponent.setchessboard(chessboard);
+            drawComponent.flipChess(nowColor);
+//            while (!(drawComponent.getSub()==10||drawComponent.getSub()==21));
+//            for (int i=0;i<8;i++){
+//                for (int j=0;j<8;j++){
+//                    chessboard[i][j]=Color.endFlip(chessboard[i][j]);
+//                }
+//            }
+//            drawComponent.setchessboard(chessboard);
             if(Judge.isStalemate(filpColor(nowColor),chessboard)) {
                 nowColor = filpColor(nowColor);
             }
