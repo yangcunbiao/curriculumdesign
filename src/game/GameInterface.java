@@ -8,7 +8,7 @@ public class GameInterface {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JFrame frame=new MainFrame();
+                JFrame frame = new LoginFrame();
             }
         });
     }
