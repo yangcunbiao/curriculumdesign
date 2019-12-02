@@ -2,15 +2,13 @@ package game;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.awt.geom.Point2D;
 import java.security.KeyPair;
 import java.util.ArrayList;
 
 
-public class MainFrame extends JFrame implements MouseMotionListener, MouseListener {
+public class MainFrame extends JFrame implements MouseMotionListener, MouseListener, WindowListener {
     //计数器
     Counter counter=new Counter(2,2);
     //画图组件
@@ -27,9 +25,11 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
     private Color[][] chessboard=new Color[8][8];
     //窗口的宽和高
     private final int mainWindowWidth=824,mainWondowHeight=738;
+    //上一个窗口
+    JFrame frontFrame;
 
-
-    public MainFrame(){
+    public MainFrame(JFrame frontFrame){
+        this.frontFrame=frontFrame;
         //TODO:设置窗口的各种信息.
         //TODO：窗口大小
         this.setSize(mainWindowWidth,mainWondowHeight);
@@ -40,7 +40,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("ico.png"));
         this.setTitle("黑白棋");
         //TODO：设置窗口关闭程序结束
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //TODO:显示窗口
         this.setVisible(true);
         //TODO:设置背景图片
@@ -60,6 +60,8 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
         //TODO:加入鼠标事件和监听器
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
+        //TODO:加入窗口监听器
+        this.addWindowListener(this);
 
     }
     //TODO：居中用的函数
@@ -80,12 +82,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
         chessboard[3][4]=Color.BLACK;
         chessboard[4][3]=Color.BLACK;
         chessboard[4][4]=Color.WHITE;
-//        for (int i=0;i<8;i++){
-//            chessboard[i][7]=Color.BLACK;
-//        }
-//        for (int i=0;i<8;i++){
-//            chessboard[i][6]=Color.WHITE;
-//        }
+
 
 
         int X=160,Y=160;
@@ -155,10 +152,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 
     @Override
     public void mouseClicked(MouseEvent e) {
-//        flipChessIndex.add(new Point(0,0));
-//        flipChessIndex.add(new Point(1,0));
-//        flipChessIndex.add(new Point(2,0));
-//        drawComponent.flipChess(nowColor);
+
     }
 
     @Override
@@ -173,13 +167,6 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
             flipChess(mouseIndexX, mouseIndexY);
             drawComponent.setchessboard(chessboard);
             drawComponent.flipChess(nowColor);
-//            while (!(drawComponent.getSub()==10||drawComponent.getSub()==21));
-//            for (int i=0;i<8;i++){
-//                for (int j=0;j<8;j++){
-//                    chessboard[i][j]=Color.endFlip(chessboard[i][j]);
-//                }
-//            }
-//            drawComponent.setchessboard(chessboard);
             if(Judge.isStalemate(filpColor(nowColor),chessboard)) {
                 nowColor = filpColor(nowColor);
             }
@@ -220,7 +207,6 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        //System.out.println(e.getX()+","+e.getY());
         Point index=getIndex(new Point2D.Double(e.getX(),e.getY()));
         mouseIndexX=(int)index.getX();
         mouseIndexY=(int)index.getY();
@@ -231,5 +217,40 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
             drawComponent.setCrossIndex(null);
             drawComponent.repaint();
         }
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        frontFrame.setVisible(true);
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
     }
 }

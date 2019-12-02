@@ -30,7 +30,8 @@ public class LoginFrame extends JFrame {
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame frame = new MainFrame();
+                JFrame frame = new MainFrame(LoginFrame.this);
+                LoginFrame.this.setVisible(false);
             }
         });
         //TODO：按钮透明化
