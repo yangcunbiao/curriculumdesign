@@ -61,7 +61,7 @@ public class LoginFrame extends JFrame {
         end.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                LoginFrame.this.dispose();
+                System.exit(-1);
             }
         });
         //TODO：按钮透明化
