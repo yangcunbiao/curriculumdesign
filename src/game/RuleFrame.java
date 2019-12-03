@@ -39,7 +39,7 @@ public class RuleFrame extends JFrame {
         byte[] b = new byte[2048];
         int n = 0;
         try {
-            DataInputStream in = new DataInputStream(new FileInputStream("规则.txt"));
+            DataInputStream in = new DataInputStream(new FileInputStream("rule.txt"));
             n = in.read(b);
         }catch (IOException e){
             e.printStackTrace();

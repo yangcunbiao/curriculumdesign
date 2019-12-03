@@ -27,6 +27,12 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
     private final int mainWindowWidth=824,mainWondowHeight=738;
     //上一个窗口
     JFrame frontFrame;
+    //双方棋子数
+    private JLabel black;
+    private JLabel white;
+    //当前回合
+    private JLabel turn;
+
 
     public MainFrame(JFrame frontFrame){
         this.frontFrame=frontFrame;
@@ -54,6 +60,20 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
         ((JPanel)this.getContentPane()).setOpaque(false);
         //TODO：初始化棋盘
         chessboardInit();
+        //TODO：双方棋子数
+        black = new JLabel("黑棋数："+counter.getPlayerNum1());
+        black.setFont(new Font("宋体", Font.BOLD, 20));
+        black.setBounds(695,420,120,20);
+        this.add(black);
+        white = new JLabel("白棋数："+counter.getPlayerNum2());
+        white.setFont(new Font("宋体", Font.BOLD, 20));
+        white.setBounds(10,420,120,20);
+        this.add(white);
+        //TODO：当前回合
+        turn = new JLabel("黑棋回合");
+        turn.setFont(new Font("宋体", Font.BOLD, 40));
+        turn.setBounds(315,45,200,40);
+        this.add(turn);
         //TODO：加入画图组件
         drawComponent= new DrawComponent(chessboard,chessIndex);
         this.add(drawComponent);
@@ -82,7 +102,6 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
         chessboard[3][4]=Color.BLACK;
         chessboard[4][3]=Color.BLACK;
         chessboard[4][4]=Color.WHITE;
-
 
 
         int X=160,Y=160;
@@ -167,6 +186,14 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
             flipChess(mouseIndexX, mouseIndexY);
             drawComponent.setchessboard(chessboard);
             drawComponent.flipChess(nowColor);
+            for(int i=0;i<8;i++){
+                for (int j=0;j<8;j++){
+                    chessboard[i][j]=Color.endFlip(chessboard[i][j]);
+                }
+            }
+            counter.count(chessboard);
+            counter.getPlayerNum1();
+            counter.getPlayerNum2();
             if(Judge.isStalemate(filpColor(nowColor),chessboard)) {
                 nowColor = filpColor(nowColor);
             }
@@ -179,6 +206,13 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
                 }else {
                     System.out.println("平局");
                 }
+            }
+            black.setText("黑棋数："+counter.getPlayerNum1());
+            white.setText("白棋数："+counter.getPlayerNum2());
+            if(nowColor == Color.BLACK){
+                turn.setText("黑棋回合");
+            }else {
+                turn.setText("白棋回合");
             }
         }
         System.out.println(nowColor);

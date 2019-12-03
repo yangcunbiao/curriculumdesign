@@ -9,6 +9,7 @@ public class Counter {
         this.playerNum2=playerNum2;
     }
 
+
     public int getPlayerNum1() {
         return playerNum1;
     }

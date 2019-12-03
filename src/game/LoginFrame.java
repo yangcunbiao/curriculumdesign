@@ -24,8 +24,8 @@ public class LoginFrame extends JFrame {
         //TODO：居中
         this.center();
         //TODO：设置按钮
-        JButton start = new JButton(new ImageIcon("开始游戏1.png"));
-        start.setPressedIcon(new ImageIcon("开始游戏2.png"));
+        JButton start = new JButton(new ImageIcon("start1.png"));
+        start.setPressedIcon(new ImageIcon("start2.png"));
         start.setBounds(80,160,140,50);
         start.addActionListener(new ActionListener() {
             @Override
@@ -40,8 +40,8 @@ public class LoginFrame extends JFrame {
         start.setBorderPainted(false);
         this.add(start);
 
-        JButton rule = new JButton(new ImageIcon("规则说明1.png"));
-        rule.setPressedIcon(new ImageIcon("规则说明2.png"));
+        JButton rule = new JButton(new ImageIcon("description1.png"));
+        rule.setPressedIcon(new ImageIcon("description2.png"));
         rule.setBounds(80,230,140,50);
         rule.addActionListener(new ActionListener() {
             @Override
@@ -55,8 +55,8 @@ public class LoginFrame extends JFrame {
         rule.setBorderPainted(false);
         this.add(rule);
 
-        JButton end = new JButton(new ImageIcon("退出游戏1.png"));
-        end.setPressedIcon(new ImageIcon("退出游戏2.png"));
+        JButton end = new JButton(new ImageIcon("exit1.png"));
+        end.setPressedIcon(new ImageIcon("exit2.png"));
         end.setBounds(80,300,140,50);
         end.addActionListener(new ActionListener() {
             @Override

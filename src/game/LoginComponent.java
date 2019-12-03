@@ -12,7 +12,7 @@ public class LoginComponent extends JComponent {
         try{
             Image background = ImageIO.read(new File("background.jpg"));
             g.drawImage(background,0,0,300,450,null);
-            Image title = ImageIO.read(new File("标题.png"));
+            Image title = ImageIO.read(new File("title.png"));
             g.drawImage(title,40,50,220,80,null);
         }catch (IOException e){
             e.printStackTrace();
