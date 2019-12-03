@@ -35,9 +35,6 @@ public class DrawComponent extends JComponent {
     //棋子坐标
     private Point2D[][] chessIndex;
 
-    public int getSub() {
-        return sub;
-    }
 
     public  DrawComponent(Color[][] chessboard, Point2D[][] chessIndex){
         //TODO:把鼠标光标变为棋子
@@ -121,8 +118,10 @@ public class DrawComponent extends JComponent {
     }
     @Override
     public void paintComponent(Graphics g){
-        Image chessboardImage=null,blackImage1=null,whiteImage1=null;
+        Image chessboardImage=null,blackImage1=null,whiteImage1=null,peopleImage1=null,peopleImage2=null;
         try {
+            peopleImage1=ImageIO.read(new File("people1.png"));
+            peopleImage2=ImageIO.read(new File("people2.png"));
             chessboardImage = ImageIO.read(new File("chessboard.png"));
             blackImage1 = ImageIO.read(new File("black1.png"));
             whiteImage1 = ImageIO.read(new File("white1.png"));
@@ -143,6 +142,8 @@ public class DrawComponent extends JComponent {
             e.printStackTrace();
         }
         if(crossIndex!=null)drawCanDrap(chessIndex[crossIndex.x][crossIndex.y],g);
+        g.drawImage(peopleImage1,0,222,null);
+        g.drawImage(peopleImage2,678,222,null);
     }
 
     public void drawCanDrap(Point2D point,Graphics g){
