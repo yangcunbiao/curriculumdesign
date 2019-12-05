@@ -4,8 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Point2D;
-import java.security.KeyPair;
-import java.util.ArrayList;
 
 
 public class MainFrame extends JFrame implements MouseMotionListener, MouseListener, WindowListener {
@@ -218,7 +216,6 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
         System.out.println(nowColor);
         drawComponent.repaint();
     }
-
     @Override
     public void mouseReleased(MouseEvent e) {
 
