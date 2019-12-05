@@ -18,7 +18,7 @@ public class GameInterface {
     //TODO：播放背景音乐
     public static void playMusic() {
         try {
-            AudioInputStream ais = AudioSystem.getAudioInputStream(new File("1111.wav"));
+            AudioInputStream ais = AudioSystem.getAudioInputStream(new File("music.wav"));
             AudioFormat aif = ais.getFormat();
             final SourceDataLine sdl;
             DataLine.Info info = new DataLine.Info(SourceDataLine.class, aif);
