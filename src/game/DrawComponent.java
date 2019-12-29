@@ -18,7 +18,7 @@ public class DrawComponent extends JComponent {
 
     //十字光标坐标
     private Point crossIndex=null;
-
+    //修改棋盘内容
     public void setchessboard(Color[][] chessboard) {
         for(int i=0;i<8;i++){
             for (int j=0;j<8;j++){
@@ -44,7 +44,7 @@ public class DrawComponent extends JComponent {
         Toolkit tk = Toolkit.getDefaultToolkit();
         Image image = new ImageIcon("black1.png").getImage();
         Cursor cursor = tk.createCustomCursor(image, new Point(20, 20), "norm");
-        //setCursor(cursor);
+        setCursor(cursor);
         //TODO：棋子坐标初始化.
         this.chessIndex=chessIndex;
         //TODO：棋盘初始化

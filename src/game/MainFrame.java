@@ -53,8 +53,6 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
         //TODO：设置图标和标题
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("ico.png"));
         this.setTitle("黑白棋");
-        //TODO：设置窗口关闭程序结束
-        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //TODO:显示窗口
         this.setVisible(true);
         //TODO:设置背景图片
@@ -253,13 +251,11 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
 
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println(e.getX()+","+e.getY());
         Point index=getIndex(new Point2D.Double(e.getX(),e.getY()));
         mouseIndexX=(int)index.getX();
         mouseIndexY=(int)index.getY();
         if (Judge.judgeDrap(mouseIndexX, mouseIndexY, nowColor, chessboard)) {
             chessboard[mouseIndexX][mouseIndexY] = nowColor;
-            System.out.println(1);
             flipChess(mouseIndexX, mouseIndexY);
             drawComponent.setchessboard(chessboard);
             drawComponent.flipChess(nowColor);
@@ -291,7 +287,6 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
                 turn.setText("白棋回合");
             }
         }
-        System.out.println(nowColor);
         drawComponent.repaint();
     }
     @Override
