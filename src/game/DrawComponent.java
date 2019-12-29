@@ -41,10 +41,10 @@ public class DrawComponent extends JComponent {
 
     public  DrawComponent(Color[][] chessboard, Point2D[][] chessIndex){
         //TODO:把鼠标光标变为棋子
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        Image image = new ImageIcon("black1.png").getImage();
-        Cursor cursor = tk.createCustomCursor(image, new Point(20, 20), "norm");
-        setCursor(cursor);
+//        Toolkit tk = Toolkit.getDefaultToolkit();
+//        Image image = new ImageIcon("black1.png").getImage();
+//        Cursor cursor = tk.createCustomCursor(image, new Point(20, 20), "norm");
+//        setCursor(cursor);
         //TODO：棋子坐标初始化.
         this.chessIndex=chessIndex;
         //TODO：棋盘初始化
