@@ -87,7 +87,8 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
             chessboardInit1();
         }
         //TODO:加入再来一局按钮
-        rmrematch=new JButton();
+        rmrematch=new JButton(new ImageIcon("restart1.png"));
+        rmrematch.setPressedIcon(new ImageIcon("restart2.png"));
         rmrematch.setBounds(300,300,140,50);
         rmrematch.addActionListener(new ActionListener() {
             @Override
@@ -96,6 +97,10 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
                 MainFrame.this.rmrematch.setVisible(false);
             }
         });
+        //TODO：按钮透明化
+        rmrematch.setContentAreaFilled(false);
+        //TODO：去边框
+        rmrematch.setBorderPainted(false);
         //this.add(rmrematch);
         rmrematch.setVisible(false);
         //TODO：加入画图组件

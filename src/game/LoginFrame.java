@@ -26,8 +26,9 @@ public class LoginFrame extends JFrame {
         this.center();
         //TODO：设置按钮
         Scanner in =new Scanner(new File("archive.txt"));
-        JButton con =new JButton();
-        con.setBounds(0,0,140,50);
+        JButton con =new JButton(new ImageIcon("continue1.png"));
+        con.setPressedIcon(new ImageIcon("continue2.png"));
+        con.setBounds(80,150,140,50);
         con.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -45,10 +46,14 @@ public class LoginFrame extends JFrame {
             con.setVisible(false);
         }
         in.close();
+        //TODO：按钮透明化
+        con.setContentAreaFilled(false);
+        //TODO：去边框
+        con.setBorderPainted(false);
         this.add(con);
         JButton start = new JButton(new ImageIcon("start1.png"));
         start.setPressedIcon(new ImageIcon("start2.png"));
-        start.setBounds(80,160,140,50);
+        start.setBounds(80,210,140,50);
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -68,7 +73,7 @@ public class LoginFrame extends JFrame {
 
         JButton rule = new JButton(new ImageIcon("description1.png"));
         rule.setPressedIcon(new ImageIcon("description2.png"));
-        rule.setBounds(80,230,140,50);
+        rule.setBounds(80,270,140,50);
         rule.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -83,7 +88,7 @@ public class LoginFrame extends JFrame {
 
         JButton end = new JButton(new ImageIcon("exit1.png"));
         end.setPressedIcon(new ImageIcon("exit2.png"));
-        end.setBounds(80,300,140,50);
+        end.setBounds(80,330,140,50);
         end.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
