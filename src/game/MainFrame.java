@@ -89,12 +89,14 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
         //TODO:加入再来一局按钮
         rmrematch=new JButton(new ImageIcon("restart1.png"));
         rmrematch.setPressedIcon(new ImageIcon("restart2.png"));
-        rmrematch.setBounds(300,300,140,50);
+        rmrematch.setBounds(550,45,140,50);
         rmrematch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MainFrame.this.chessboardInit();
                 MainFrame.this.rmrematch.setVisible(false);
+                drawComponent.setchessboard(chessboard);
+                drawComponent.repaint();
             }
         });
         //TODO：按钮透明化
@@ -181,6 +183,8 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
             Y+=chessboardFieldWidth;
         }
         counter.count(chessboard);
+        black.setText("黑棋数："+counter.getPlayerNum1());
+        white.setText("白棋数："+counter.getPlayerNum2());
         if(nowColor == Color.BLACK){
             turn.setText("黑棋回合");
         }else {

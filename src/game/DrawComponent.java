@@ -116,10 +116,10 @@ public class DrawComponent extends JComponent {
         };
         if(color==Color.BLACK){
             sub=10;
-            timer.schedule(myTask1,0,100);
+            timer.schedule(myTask1,0,50);
         }else{
             sub=-1;
-            timer.schedule(myTask,0,100);
+            timer.schedule(myTask,0,50);
         }
 
     }
