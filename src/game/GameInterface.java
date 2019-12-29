@@ -4,13 +4,18 @@ import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class GameInterface {
     public static void main(String[] args){
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JFrame frame = new LoginFrame();
+                try {
+                    JFrame frame = new LoginFrame();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         });
         new Thread(()->{while(true) {playMusic();}}).start();

@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Point2D;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Scanner;
 
 
 public class MainFrame extends JFrame implements MouseMotionListener, MouseListener, WindowListener {
@@ -30,9 +34,15 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
     private JLabel white;
     //当前回合
     private JLabel turn;
+    //再来一局的按钮
+    JButton rmrematch;
+    //继续游戏按钮
+    JButton conButton;
 
 
-    public MainFrame(JFrame frontFrame){
+
+    public MainFrame(JFrame frontFrame,boolean con,JButton conButton) throws FileNotFoundException {
+        this.conButton=conButton;
         this.frontFrame=frontFrame;
         //TODO:设置窗口的各种信息.
         //TODO：窗口大小
@@ -56,8 +66,6 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
         jLabelBackGround.setBounds(0,0,screenSize.width,screenSize.height);
         this.getRootPane().add(jLabelBackGround);
         ((JPanel)this.getContentPane()).setOpaque(false);
-        //TODO：初始化棋盘
-        chessboardInit();
         //TODO：双方棋子数
         black = new JLabel("黑棋数："+counter.getPlayerNum1());
         black.setFont(new Font("宋体", Font.BOLD, 20));
@@ -72,6 +80,24 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
         turn.setFont(new Font("宋体", Font.BOLD, 40));
         turn.setBounds(315,45,200,40);
         this.add(turn);
+        //TODO：初始化棋盘
+        if(con==false){
+            chessboardInit();
+        }else{
+            chessboardInit1();
+        }
+        //TODO:加入再来一局按钮
+        rmrematch=new JButton();
+        rmrematch.setBounds(300,300,140,50);
+        rmrematch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainFrame.this.chessboardInit();
+                MainFrame.this.rmrematch.setVisible(false);
+            }
+        });
+        this.add(rmrematch);
+        rmrematch.setVisible(false);
         //TODO：加入画图组件
         drawComponent= new DrawComponent(chessboard,chessIndex);
         this.add(drawComponent);
@@ -80,6 +106,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
         this.addMouseMotionListener(this);
         //TODO:加入窗口监听器
         this.addWindowListener(this);
+
 
     }
     //TODO：居中用的函数
@@ -110,6 +137,49 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
                 X+=chessboardFieldWidth;
             }
             Y+=chessboardFieldWidth;
+        }
+    }
+    private void chessboardInit1() throws FileNotFoundException {
+        Scanner in=new Scanner(new File("archive.txt"));
+        in.nextLine();
+        String color=in.nextLine();
+        if(color.compareTo("NULL")==0) {
+            nowColor = Color.NULL;
+        }else if(color.compareTo("BLACK")==0){
+            nowColor = Color.BLACK;
+        }else if(color.compareTo("WHITE")==0){
+            nowColor = Color.WHITE;
+        }
+        for(int i=0;i<8;i++){
+            String line=in.nextLine();
+            Scanner lineScanner=new Scanner(line);
+            lineScanner.useDelimiter(" ");
+            for(int j=0;j<8;j++){
+                String chess=lineScanner.next();
+                if(chess.compareTo("NULL")==0) {
+                    chessboard[i][j] = Color.NULL;
+                }else if(chess.compareTo("BLACK")==0){
+                    chessboard[i][j] = Color.BLACK;
+                }else if(chess.compareTo("WHITE")==0){
+                    chessboard[i][j] = Color.WHITE;
+                }
+            }
+        }
+        in.close();
+        int X=160,Y=160;
+        for (int i=0;i<8;i++){
+            X=160;
+            for (int j=0;j<8;j++){
+                chessIndex[i][j]=new Point2D.Double(X,Y);
+                X+=chessboardFieldWidth;
+            }
+            Y+=chessboardFieldWidth;
+        }
+        counter.count(chessboard);
+        if(nowColor == Color.BLACK){
+            turn.setText("黑棋回合");
+        }else {
+            turn.setText("白棋回合");
         }
     }
     //TODO:得到鼠标的棋盘坐标
@@ -189,21 +259,22 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
                     chessboard[i][j]=Color.endFlip(chessboard[i][j]);
                 }
             }
-            counter.count(chessboard);
-            counter.getPlayerNum1();
-            counter.getPlayerNum2();
+            //counter.count(chessboard);
+            //counter.getPlayerNum1();
+            //counter.getPlayerNum2();
             if(Judge.isStalemate(filpColor(nowColor),chessboard)) {
                 nowColor = filpColor(nowColor);
             }
             if(Judge.judgeIsOver(chessboard)){
                 counter.count(chessboard);
                 if(counter.getPlayerNum1()>counter.getPlayerNum2()){
-                    System.out.println("黑棋胜");
+                    turn.setText("黑棋胜");
                 }else if(counter.getPlayerNum1()<counter.getPlayerNum2()){
-                    System.out.println("白棋胜");
+                    turn.setText("白棋胜");
                 }else {
-                    System.out.println("平局");
+                    turn.setText("平局");
                 }
+                rmrematch.setVisible(true);
             }
             black.setText("黑棋数："+counter.getPlayerNum1());
             white.setText("白棋数："+counter.getPlayerNum2());
@@ -258,6 +329,28 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
     @Override
     public void windowClosing(WindowEvent e) {
         frontFrame.setVisible(true);
+        try {
+            PrintWriter out=new PrintWriter("archive.txt");
+            if(Judge.judgeIsOver(chessboard)){
+                out.println("true");
+                conButton.setVisible(false);
+            }else{
+                out.println("false");
+                conButton.setVisible(true);
+            }
+            out.println(nowColor);
+            for (Color[] a:chessboard){
+                for(Color color:a){
+                    out.print(color+" ");
+                }
+                out.println();
+            }
+            out.close();
+            this.dispose();
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+
     }
 
     @Override

@@ -3,7 +3,7 @@ package game;
 public enum Color {
     BLACK(1),WHITE(-1),NULL(0),BLACKTOWHITE(2),WHITETOBLACK(3);
     private int value;
-    private  Color(int value){
+    Color(int value){
         this.value=value;
     }
     public Boolean isSame(Color a){

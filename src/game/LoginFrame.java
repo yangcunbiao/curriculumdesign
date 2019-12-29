@@ -4,11 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class LoginFrame extends JFrame {
     //窗口的宽和高
     private final int width=310,height=480;
-    public LoginFrame() {
+    public LoginFrame() throws FileNotFoundException {
         //TODO：设置窗口大小
         this.setSize(width,height);
         this.setResizable(false);
@@ -22,13 +25,38 @@ public class LoginFrame extends JFrame {
         //TODO：居中
         this.center();
         //TODO：设置按钮
+        Scanner in =new Scanner(new File("archive.txt"));
+        JButton con =new JButton();
+        con.setBounds(0,0,140,50);
+        con.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    JFrame frame = new MainFrame(LoginFrame.this,true,con);
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+                LoginFrame.this.setVisible(false);
+            }
+        });
+        if(in.nextLine().compareTo("false")==0){
+            con.setVisible(true);
+        }else{
+            con.setVisible(false);
+        }
+        in.close();
+        this.add(con);
         JButton start = new JButton(new ImageIcon("start1.png"));
         start.setPressedIcon(new ImageIcon("start2.png"));
         start.setBounds(80,160,140,50);
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame frame = new MainFrame(LoginFrame.this);
+                try {
+                    JFrame frame = new MainFrame(LoginFrame.this,false,con);
+                } catch (FileNotFoundException ex) {
+                    ex.printStackTrace();
+                }
                 LoginFrame.this.setVisible(false);
             }
         });
