@@ -101,7 +101,7 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
         rmrematch.setContentAreaFilled(false);
         //TODO：去边框
         rmrematch.setBorderPainted(false);
-        //this.add(rmrematch);
+        this.add(rmrematch);
         rmrematch.setVisible(false);
         //TODO：加入画图组件
         drawComponent= new DrawComponent(chessboard,chessIndex);
@@ -259,11 +259,11 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
             flipChess(mouseIndexX, mouseIndexY);
             drawComponent.setchessboard(chessboard);
             drawComponent.flipChess(nowColor);
-//            for(int i=0;i<8;i++){
-//                for (int j=0;j<8;j++){
-//                    chessboard[i][j]=Color.endFlip(chessboard[i][j]);
-//                }
-//            }
+            for(int i=0;i<8;i++){
+                for (int j=0;j<8;j++){
+                    chessboard[i][j]=Color.endFlip(chessboard[i][j]);
+                }
+            }
             counter.count(chessboard);
             if(Judge.isStalemate(filpColor(nowColor),chessboard)) {
                 nowColor = filpColor(nowColor);
@@ -281,9 +281,9 @@ public class MainFrame extends JFrame implements MouseMotionListener, MouseListe
             }
             black.setText("黑棋数："+counter.getPlayerNum1());
             white.setText("白棋数："+counter.getPlayerNum2());
-            if(nowColor == Color.BLACK){
+            if(nowColor == Color.BLACK&&Judge.judgeIsOver(chessboard)==false){
                 turn.setText("黑棋回合");
-            }else {
+            }else if(Judge.judgeIsOver(chessboard)==false){
                 turn.setText("白棋回合");
             }
         }

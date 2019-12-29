@@ -7,7 +7,6 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,7 +20,11 @@ public class DrawComponent extends JComponent {
     private Point crossIndex=null;
 
     public void setchessboard(Color[][] chessboard) {
-        this.chessboard = chessboard;
+        for(int i=0;i<8;i++){
+            for (int j=0;j<8;j++){
+               this.chessboard[i][j]=chessboard[i][j];
+            }
+        }
     }
     //棋子翻转
     private Timer timer=new Timer();
@@ -45,7 +48,11 @@ public class DrawComponent extends JComponent {
         //TODO：棋子坐标初始化.
         this.chessIndex=chessIndex;
         //TODO：棋盘初始化
-        this.chessboard=chessboard;
+        for(int i=0;i<8;i++){
+            for (int j=0;j<8;j++){
+                this.chessboard[i][j]=chessboard[i][j];
+            }
+        }
         //TODO：图片集初始化
         try {
             images[0] = ImageIO.read(new File("black1.png"));
